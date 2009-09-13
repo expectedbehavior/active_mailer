@@ -7,7 +7,50 @@ Introduction goes here.
 Example
 =======
 
-Example goes here.
+# need the users table
+class CreateActiveMailerTables < ActiveRecord::Migration
+  def self.up
+    create_table :email_users do |t|
+      t.string :email_address
+      t.timestamps
+    end
+    
+    create_table :email_user_associations do |t|
+      t.references :email_user
+      t.string :emailable_type
+      t.integer :emailable_id
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :email_users
+    drop_table :email_user_associations
+  end
+end
 
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+
+# sample active mailer migration
+class CreateNotificationEmail < ActiveRecord::Migration
+  def self.up
+    create_active_mailer_table :notification_emails do |t|
+      t.integer :registration_id
+      t.string  :kind
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :notification_emails
+  end
+end
+
+
+Copyright (c) 2009 Matt Gordon, released under the MIT license
+
+
+#sender_id is already taken, which is ghetto. make sender polymorphic and let them decide
+#make a generator
+#make recipients polymorphic
+#automatically make the email_user and association tables
