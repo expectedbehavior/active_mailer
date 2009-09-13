@@ -71,3 +71,4 @@ Copyright (c) 2009 Matt Gordon, released under the MIT license
 # template variables aren't implemented yet. it just makes the accessor and doesn't provide it to the email
 
 # rendered_contents contains what was actually sent
+

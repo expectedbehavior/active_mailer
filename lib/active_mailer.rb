@@ -166,7 +166,7 @@ module ActiveMailer #:nodoc:
               attachment(
                          :content_type => (att[:content_type]  || att.content_type), 
                          :body         => File.read(att[:path] || att.path), 
-                         :file_name    => (att[:file_name]     || att.file_name)
+                         :filename    => (att[:file_name]     || att.file_name)
                          )
             end
           end
