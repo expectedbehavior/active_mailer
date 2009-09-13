@@ -54,3 +54,8 @@ Copyright (c) 2009 Matt Gordon, released under the MIT license
 #make a generator
 #make recipients polymorphic
 #automatically make the email_user and association tables
+#path to default erb template is ghetto
+
+# I automatically make a template_variable for every attribute of the table, but if you forget and have
+  `foo` as an attribute on your class along with `template_variable :foo` in your AM object then
+  the object will mysteriously refuse to set the attribute.
