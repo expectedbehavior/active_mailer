@@ -9,10 +9,18 @@ module ActiveMailer #:nodoc:
     attr_accessor :rendered_contents # contains the actual sent email after send! is called
     
     validates_presence_of :sender
-    validates_length_of   :recipients, :minimum => 1
+#    validates_length_of   :recipients, :minimum => 1
 #    validates_length_of   :body,       :minimum => 1
     validates_length_of   :subject,    :minimum => 1
-        
+    
+    validation :must_have_at_least_one_recipient_of_some_kind
+    
+    def must_have_at_least_one_recipient_of_some_kind
+      if self.recipients.blank? and self.cc.blank? and self.bcc.blank?
+        self.errors.add_to_base("You have to have at least one recipient in the to, cc, or bcc fields")
+      end
+    end
+    
     cattr_accessor :before_send_actions
     cattr_accessor :after_send_actions
 
