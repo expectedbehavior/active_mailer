@@ -96,6 +96,7 @@ module ActiveMailer #:nodoc:
     mailer_variable :cc
     mailer_variable :body
     mailer_variable :content_type
+    mailer_variable :attachments
     
     def mailer_variables
       # need to include self.class.content_columns
@@ -155,9 +156,16 @@ module ActiveMailer #:nodoc:
         DefaultActionMailer.instance_eval do
           define_method(method_name) do |*args|
             options = args[0]
+            attachments_to_set = (options[:attachments] || [])
             options.keys.each do |k|
               self.instance_eval("@#{k.to_s} = options[k]") if options[k]
 #              instance_variable_set(k.to_s, options[k])
+            end
+            
+            attachments_to_set.each do |att|
+              content_type = att[:content_content_type]
+              body = File.read(att[:content_file_name])
+              attachment(:content_type => att.content_type, :body => att)
             end
           end
         end

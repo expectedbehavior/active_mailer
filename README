@@ -71,3 +71,6 @@ Copyright (c) 2009 Matt Gordon, released under the MIT license
 # template variables aren't implemented yet. it just makes the accessor and doesn't provide it to the email
 
 # rendered_contents contains what was actually sent
+
+# in the attachments code in define_action_mailer_method we have content_content_type hard coded, which
+  is really dumb
