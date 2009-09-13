@@ -162,10 +162,12 @@ module ActiveMailer #:nodoc:
 #              instance_variable_set(k.to_s, options[k])
             end
             
-            attachments_to_set.each do |att|
-              content_type = (att[:content_type] || att.content_type)
-              body = File.read(att[:path] || att.path)
-              attachment(:content_type => content_type, :body => body)
+            attachments_to_set.each do |att|              
+              attachment(
+                         :content_type => (att[:content_type]  || att.content_type), 
+                         :body         => File.read(att[:path] || att.path), 
+                         :file_name    => (att[:file_name]     || att.file_name)
+                         )
             end
           end
         end
