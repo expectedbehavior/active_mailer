@@ -6,6 +6,7 @@ module ActiveMailer #:nodoc:
     has_many    :recipients, :through => :email_user_associations, :source => "email_user"
     belongs_to  :sender, :class_name => "EmailUser", :foreign_key => "sender_id"
     attr_accessor :body     # leave this as an accessor for now since it's complicated
+    attr_accessor :rendered_contents # contains the actual sent email after send! is called
     
     validates_presence_of :sender
     validates_length_of   :recipients, :minimum => 1
@@ -128,7 +129,8 @@ module ActiveMailer #:nodoc:
       if self.save!
         logger.info "sending email to #{self.recipients.join(", ")}"
         self.class.define_action_mailer_method
-        DefaultActionMailer.send("deliver_#{self.class.default_email_method_name}".to_sym, self.mailer_variables)
+        sent_mail = DefaultActionMailer.send("deliver_#{self.class.default_email_method_name}".to_sym, self.mailer_variables)
+        self.rendered_contents = sent_mail.body # in case someone wants to save it
         logger.info "email #{self.class.default_email_method_name} sent to #{self.recipients.map(&:email_address).join(", ")} from #{self.sender.email_address}"
         self.update_attribute("sent_at", Time.now)
       end
