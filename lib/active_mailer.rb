@@ -6,11 +6,9 @@ module ActiveMailer #:nodoc:
     has_many    :recipients, :through => :email_user_associations, :source => "email_user"
     belongs_to  :sender, :class_name => "EmailUser", :foreign_key => "sender_id"
     attr_accessor :body     # leave this as an accessor for now since it's complicated
-    attr_accessor :rendered_contents # contains the actual sent email after send! is called
+    attr_accessor :rendered_contents # contains the actual sent email after `send!` is called
     
     validates_presence_of :sender
-#    validates_length_of   :recipients, :minimum => 1
-#    validates_length_of   :body,       :minimum => 1
     validates_length_of   :subject,    :minimum => 1
     
     validate :must_have_at_least_one_recipient_of_some_kind
@@ -86,32 +84,17 @@ module ActiveMailer #:nodoc:
     
     cattr_accessor :template_variables
     def self.template_variable(variable_name)
+      debugger
       self.template_variables ||= []
       self.template_variables << variable_name
       self.template_variables.flatten!
       attr_accessor variable_name
     end
-    
-    cattr_accessor :mailer_variables
-    def self.mailer_variable(variable_name)
-      self.mailer_variables ||= []
-      self.mailer_variables << variable_name
-      self.mailer_variables.flatten!
-      attr_accessor variable_name
-    end
-    mailer_variable :template
-    mailer_variable :bcc
-    mailer_variable :cc
-    mailer_variable :body
-    mailer_variable :content_type
-    mailer_variable :attachments
-    
+        
     def mailer_variables
-      # need to include self.class.content_columns
-      # NotificationEmail.reflect_on_all_associations.map(&:name)
       mvars = {}
-      
-      vars_to_include = self.class.mailer_variables + self.class.content_columns.map(&:name) + self.class.reflect_on_all_associations.map(&:name)
+
+      vars_to_include = self.class.read_mailer_variables + self.class.content_columns.map(&:name) + self.class.reflect_on_all_associations.map(&:name)
       
       vars_to_include.each do |var|
         mvars[var] = self.send(var.to_sym)
@@ -124,15 +107,12 @@ module ActiveMailer #:nodoc:
       mvars
     end
     
-#    mailer_variable :subject, :body, :sender, :recipients
-    
     # All the mailer methods will be defined on this ActionMailer class
     class DefaultActionMailer < ActionMailer::Base
 #       def self.create_method(name, &block) # syntactically convenient
 #         self.send(:define_method, name, &block)
 #       end      
     end
-#    delegate :render, :to => :DefaultActionMailer
         
     def send! # should take false to avoid validations i.e. sending it again
       if self.save!
@@ -145,16 +125,22 @@ module ActiveMailer #:nodoc:
       end
     end
     
-#     def define_action_mailer_class
-#       return action_mailer_class if (action_mail_class rescue nil)
-#       m = Module.new do 
-#         def email(options = {})
-#           options.keys.each do |k|
-#             instance_variable_set(k.to_s, options[k])
-#           end
-#         end
-#       end
-#     end
+    def self.mailer_variable(*variable_name)
+      write_inheritable_attribute(:mailer_variable, Set.new(variable_name.map(&:to_s)) + (read_mailer_variables || []))
+      attr_accessor *variable_name
+    end
+
+    def self.read_mailer_variables
+      read_inheritable_attribute(:mailer_variable)
+    end
+    mailer_variable :template
+    mailer_variable :bcc
+    mailer_variable :cc
+    mailer_variable :body
+    mailer_variable :content_type
+    mailer_variable :attachments
+
+    
     
     class << self # Class methods
       def define_action_mailer_method
@@ -186,8 +172,5 @@ module ActiveMailer #:nodoc:
       end
       
     end
-    
-    
-    
   end
 end
