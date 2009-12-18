@@ -3,6 +3,13 @@ ActiveMailer
 
 Introduction goes here.
 
+DHH thinks this is a bad idea and he's wrong. Email needs to have somewhere to put the business
+logic surrounding it, and the controller is not the place for that.
+http://www.robbyonrails.com/articles/2009/11/16/sending-email-controllers-versus-models
+http://twitter.com/dhh/status/5769040367
+http://twitter.com/dhh/status/5769698185
+http://www.loudthinking.com/posts/43-think-of-emails-as-views-delivered-through-smtp
+
 
 Example
 =======
