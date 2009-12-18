@@ -54,29 +54,13 @@ class CreateNotificationEmail < ActiveRecord::Migration
 end
 
 
-Copyright (c) 2009 Matt Gordon, released under the MIT license
+Contributing
+============
+
+Bugs/Feature
+http://www.pivotaltracker.com/projects/14211
 
 
-#sender_id is already taken, which is ghetto. make sender polymorphic and let them decide
-#make a generator
-#make recipients polymorphic
-#automatically make the email_user and association tables
-#path to default erb template is ghetto
+Copyright (c) 2009 [Expected Behavior, LLC], released under the MIT license
 
-# I automatically make a template_variable for every attribute of the table, but if you forget and have
-  `foo` as an attribute on your class along with `template_variable :foo` in your AM object then
-  the object will mysteriously refuse to set the attribute.
-
-# global to, cc, bcc feature
-# send! should set errors not throw exceptions
-
-#make logging easier
-
-#can end up with duplicates in template_variable (and maybe mailer_variable); possibly caused by
- using reload! in console. Have to explciitly use template_variable(?)
-
-# template variables aren't implemented yet. it just makes the accessor and doesn't provide it to the email
-
-# rendered_contents contains what was actually sent, we should make it an option to store it instead of 
-  making it your job every time
 
