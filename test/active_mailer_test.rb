@@ -1,8 +1,7 @@
-require 'test/unit'
+require 'test_helper'
 
-class ActiveMailerTest < Test::Unit::TestCase
-  # Replace this with your real tests.
-  def test_this_plugin
-    flunk
+class ActiveMailerTest < ActiveSupport::TestCase
+  test "truth" do
+    assert_kind_of Module, ActiveMailer
   end
 end
