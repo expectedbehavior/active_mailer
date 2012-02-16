@@ -15,12 +15,14 @@ module ActiveMailer #:nodoc:
     
     def must_have_at_least_one_recipient_of_some_kind
       if self.recipients.blank? and self.cc.blank? and self.bcc.blank?
-        self.errors.add_to_base("You have to have at least one recipient in the to, cc, or bcc fields")
+        self.errors[:base] << "You have to have at least one recipient in the to, cc, or bcc fields"
       end
     end
     
     cattr_accessor :before_send_actions
     cattr_accessor :after_send_actions
+
+    class_attribute :mailer_variables
 
     alias :ar_sender= :sender=
     def sender=(email)
@@ -82,19 +84,18 @@ module ActiveMailer #:nodoc:
 #     end
     
     
-    cattr_accessor :template_variables
-    def self.template_variable(variable_name)
-      debugger
-      self.template_variables ||= []
-      self.template_variables << variable_name
-      self.template_variables.flatten!
-      attr_accessor variable_name
-    end
+#     cattr_accessor :template_variables
+#     def self.template_variable(variable_name)
+#       self.template_variables ||= []
+#       self.template_variables << variable_name
+#       self.template_variables.flatten!
+#       attr_accessor variable_name
+#     end
         
     def mailer_variables
       mvars = {}
 
-      vars_to_include = self.class.read_mailer_variables + self.class.content_columns.map(&:name) + self.class.reflect_on_all_associations.map(&:name)
+      vars_to_include = self.class.mailer_variables + self.class.content_columns.map(&:name) + self.class.reflect_on_all_associations.map(&:name)
       
       vars_to_include.each do |var|
         mvars[var] = self.send(var.to_sym)
@@ -118,20 +119,16 @@ module ActiveMailer #:nodoc:
       if self.save!
         logger.info "sending email to #{self.recipients.join(", ")}"
         self.class.define_action_mailer_method
-        sent_mail = DefaultActionMailer.send("deliver_#{self.class.default_email_method_name}".to_sym, self.mailer_variables)
-        self.rendered_contents = sent_mail.body # in case someone wants to save it
+        sent_mail = DefaultActionMailer.send("#{self.class.default_email_method_name}".to_sym, self.mailer_variables).deliver
+        self.rendered_contents = sent_mail.body.to_s # in case someone wants to save it
         logger.info "email #{self.class.default_email_method_name} sent to #{self.recipients.map(&:email_address).join(", ")} from #{self.sender.email_address}"
         self.update_attribute("sent_at", Time.now)
       end
     end
     
     def self.mailer_variable(*variable_name)
-      write_inheritable_attribute(:mailer_variable, Set.new(variable_name.map(&:to_s)) + (read_mailer_variables || []))
+      self.mailer_variables =  Set.new(variable_name.map(&:to_s)) + (mailer_variables || [])
       attr_accessor *variable_name
-    end
-
-    def self.read_mailer_variables
-      read_inheritable_attribute(:mailer_variable)
     end
     mailer_variable :template
     mailer_variable :bcc
@@ -163,6 +160,10 @@ module ActiveMailer #:nodoc:
                          :filename    => (att[:file_name]     || att.file_name)
                          )
             end
+
+            mail :to => options[:recipients],
+            :subject => options[:subject],
+            :from => options[:sender].email_address
           end
         end
       end
