@@ -20,3 +20,5 @@ ActiveRecord::Migrator.migrate File.expand_path("../fixtures/dummyapp_rails_3.2/
 
 # Load support files
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+
