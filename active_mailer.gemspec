@@ -2,12 +2,12 @@
 # project in your rails apps through git.
 Gem::Specification.new do |s|
   s.name = "active_mailer"
-  s.summary     = "Audit you some emails!"
-  s.description = "A gem that makes it really easy to audit your emails as well as validate them."
+  s.summary     = "Adds model-level validation to emails."
+  s.description = "Application that have complext email sending logic have DRYness problems. ActiveMailersolves that by making a legitimate email model where all sending logic belongs. Also capable of acting as an audit trail for email sending."
   s.authors     = ["Matt Gordon"]
   s.email       = 'support@expectedbehavior.com'
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.2"
+  s.version = "0.0.3"
   s.homepage    =
     'https://github.com/expectedbehavior/active_mailer'
   
