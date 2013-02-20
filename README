@@ -70,7 +70,7 @@ end
 
 At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send.
 
-> f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com", recipients => "test@example.com")
+> f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com", :recipients => "test@example.com")
 => #<FooEmail id: nil, blahblahblah>
 
 > f.send!
