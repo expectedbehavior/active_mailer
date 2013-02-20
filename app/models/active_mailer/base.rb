@@ -41,6 +41,7 @@ module ActiveMailer #:nodoc:
     alias :ar_recipients= :recipients=
     def recipients=(emails)
       emails = [emails] unless emails.is_a?(Array)
+      emails.compact!
       self.ar_recipients = emails.map! do |email|
         if email.is_a?(String)
           EmailUser.find_or_create_by_email_address(email)
