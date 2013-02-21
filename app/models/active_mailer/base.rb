@@ -9,7 +9,7 @@ module ActiveMailer #:nodoc:
     
     has_many    :email_user_associations, :as => :emailable
     has_many    :recipients, :through => :email_user_associations, :source => "email_user"
-    belongs_to  :sender, :class_name => "EmailUser", :foreign_key => "sender_id"
+    belongs_to  :sender, :class_name => "ActiveMailer::EmailUser", :foreign_key => "sender_id"
     attr_accessor :body     # leave this as an accessor for now since it's complicated
     attr_accessor :rendered_contents # contains the actual sent email after `send!` is called
     
