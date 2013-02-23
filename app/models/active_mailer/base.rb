@@ -123,12 +123,16 @@ module ActiveMailer #:nodoc:
 #         self.send(:define_method, name, &block)
 #       end      
     end
+    
+    def mailer(reload = false)
+      @mailer ||= DefaultActionMailer.send("#{self.class.default_email_method_name}".to_sym, self.mailer_variables)
+    end
         
     def send! # should take false to avoid validations i.e. sending it again
       if self.save!
         logger.info "sending email to #{self.recipients.join(", ")}"
         self.class.define_action_mailer_method
-        sent_mail = DefaultActionMailer.send("#{self.class.default_email_method_name}".to_sym, self.mailer_variables).deliver
+        sent_mail = mailer.deliver
         self.rendered_contents = sent_mail.body.to_s # in case someone wants to save it
         logger.info "email #{self.class.default_email_method_name} sent to #{self.recipients.map(&:email_address).join(", ")} from #{self.sender.email_address}"
         self.update_attribute("sent_at", Time.now)
@@ -156,6 +160,7 @@ module ActiveMailer #:nodoc:
         DefaultActionMailer.instance_eval do
           define_method(method_name) do |*args|
             options = args[0]
+            options = options.with_indifferent_access
             attachments_to_set = (options[:attachments] || [])
             options.keys.each do |k|
               self.instance_eval("@#{k.to_s} = options[k]") if options[k]
