@@ -12,8 +12,8 @@ http://www.loudthinking.com/posts/43-think-of-emails-as-views-delivered-through-
 
 ##Installation
 
-1) `script/plugin install git://github.com/expectedbehavior/active_mailer.git`
-2) Make the tables for the classes that ActiveMailer uses to store the people you send email to. There's no need to make the models; those are included with the gem.
+1. `script/plugin install git://github.com/expectedbehavior/active_mailer.git`
+2. Make the tables for the classes that ActiveMailer uses to store the people you send email to. There's no need to make the models; those are included with the gem.
 
 ``` ruby
 class CreateActiveMailerTables < ActiveRecord::Migration
@@ -42,9 +42,9 @@ end
 
 There's no generator yet (high on the list of things to do). In the mean time, making a new ActiveMailer class can be done like this.
 
-1) `script/generate model FooEmail # or whatever you want to call your email`
-2) Open up the FooEmail model and change `ActiveRecord::Base` to `ActiveMailer::Base`
-3) Open up the FooEmail migration and use `create_active_mailer_table` instead of the usual `create_table`.
+1. `script/generate model FooEmail # or whatever you want to call your email`
+2. Open up the FooEmail model and change `ActiveRecord::Base` to `ActiveMailer::Base`
+3. Open up the FooEmail migration and use `create_active_mailer_table` instead of the usual `create_table`.
 ``` ruby
 # sample active mailer migration
 class CreateFooEmail < ActiveRecord::Migration
@@ -61,7 +61,8 @@ class CreateFooEmail < ActiveRecord::Migration
   end
 end
 ```
-4) Make the template for your email (in this case called 'foo_email.rb') in app/views/active_mailer/base/default_action_mailer
+
+4. Make the template for your email (in this case called 'foo_email.rb') in app/views/active_mailer/base/default_action_mailer
 
 At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send.
 
