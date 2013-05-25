@@ -45,6 +45,7 @@ There's no generator yet (high on the list of things to do). In the mean time, m
 1. `script/generate model FooEmail # or whatever you want to call your email`
 2. Open up the FooEmail model and change `ActiveRecord::Base` to `ActiveMailer::Base`
 3. Open up the FooEmail migration and use `create_active_mailer_table` instead of the usual `create_table`.
+
 ``` ruby
 # sample active mailer migration
 class CreateFooEmail < ActiveRecord::Migration
@@ -71,7 +72,7 @@ At this point, there's no need to do any more. You can send your email by making
 => #<FooEmail id: nil, blahblahblah>
 > f.send!
 => true
-``` ruby
+```
 
 ##More Advanced Usage
 
