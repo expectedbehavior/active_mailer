@@ -46,20 +46,20 @@ There's no generator yet (high on the list of things to do). In the mean time, m
 2. Open up the FooEmail model and change `ActiveRecord::Base` to `ActiveMailer::Base`
 3. Open up the FooEmail migration and use `create_active_mailer_table` instead of the usual `create_table`.
 ``` ruby
-class CreateFooEmail < ActiveRecord::Migration
-  # sample active mailer migration
-  def self.up
-    create_active_mailer_table :foo_emails do |t|
-      t.integer :registration_id
-      t.string  :kind
-      t.timestamps
-    end
-  end
+    # sample active mailer migration
+    class CreateFooEmail < ActiveRecord::Migration
+      def self.up
+        create_active_mailer_table :foo_emails do |t|
+          t.integer :registration_id
+          t.string  :kind
+          t.timestamps
+        end
+      end
 
-  def self.down
-    drop_table :foo_emails
-  end
-end
+      def self.down
+        drop_table :foo_emails
+      end
+    end
 ```
 4. Make the template for your email (in this case called 'foo_email.rb') in app/views/active_mailer/base/default_action_mailer
 
