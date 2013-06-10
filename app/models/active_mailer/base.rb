@@ -139,6 +139,10 @@ module ActiveMailer #:nodoc:
       end
     end
     
+    def self.layout(*args)
+      DefaultActionMailer.send("layout", *args)
+    end
+    
     def self.mailer_variable(*variable_name)
       self.mailer_variables =  Set.new(variable_name.map(&:to_s)) + (mailer_variables || [])
       attr_accessor *variable_name

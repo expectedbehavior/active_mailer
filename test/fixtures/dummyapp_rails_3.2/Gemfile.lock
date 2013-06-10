@@ -1,7 +1,7 @@
 PATH
   remote: /Users/esquivalient/code/active_mailer
   specs:
-    active_mailer (0.0.2)
+    active_mailer (0.0.5)
       activesupport (~> 3.2)
       rails (~> 3.2)
 

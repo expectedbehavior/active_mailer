@@ -12,3 +12,4 @@ gem "pry-nav"
 gem "pry-stack_explorer"  
 
 gem "wrong"
+gem "factory_girl"
