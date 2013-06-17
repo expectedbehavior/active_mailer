@@ -36,3 +36,4 @@ coverage
 bin
 repos
 test/fixtures/repos
+*.gem

@@ -1,3 +1,6 @@
+= 0.0.8
+* do not coerce headers
+
 = 0.0.7
 * support for setting custom email headers. Give us the hassssh.
 
