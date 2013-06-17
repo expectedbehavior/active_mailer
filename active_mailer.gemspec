@@ -7,16 +7,16 @@ Gem::Specification.new do |s|
   s.authors     = ["Matt Gordon"]
   s.email       = 'support@expectedbehavior.com'
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.6"
+  s.version = "0.0.7"
   s.homepage    =
     'https://github.com/expectedbehavior/active_mailer'
-  
-  
+
+
   s.required_rubygems_version = "> 1.3.6"
- 
+
   s.add_dependency "activesupport" , "~> 3.2"
   s.add_dependency "rails"         , "~> 3.2"
- 
+
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
   s.require_path = 'lib'

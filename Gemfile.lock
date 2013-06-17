@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    active_mailer (0.0.5)
+    active_mailer (0.0.7)
       activesupport (~> 3.2)
       rails (~> 3.2)
 
