@@ -1,3 +1,6 @@
+= 0.0.9
+* okay, this time we are totally setting the headers correctly
+
 = 0.0.8
 * do not coerce headers
 

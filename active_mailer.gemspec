@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Matt Gordon"]
   s.email       = 'support@expectedbehavior.com'
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.8"
+  s.version = "0.0.9"
   s.homepage    =
     'https://github.com/expectedbehavior/active_mailer'
 

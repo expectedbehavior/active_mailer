@@ -35,8 +35,8 @@ class ActiveMailerTest < ActiveSupport::TestCase
     email = InvitationEmail.new(:sender => "spammy@example.com",
                                 :recipients => ["takesit@upemail.com", nil],
                                 :subject => "YOU GUYS!")
-    email.headers = "SOMETHING: else"
+    email.headers = {"SOMETHING" => "else"}
     assert { email.send! }
-    assert { email.mailer["headers"].to_s == "SOMETHING: else" }
+    assert { email.mailer.header["SOMETHING"].to_s == "else" }
   end
 end

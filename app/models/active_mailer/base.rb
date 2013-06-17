@@ -182,7 +182,7 @@ module ActiveMailer #:nodoc:
               :to      => options[:recipients],
               :subject => options[:subject],
               :from    => options[:sender].email_address }
-            mail_options[:headers] = options[:headers] if options[:headers].present?
+            headers(options[:headers]) if options[:headers].present?
             mail(mail_options)
           end
         end
