@@ -11,3 +11,4 @@ vendor/bundle
 test/log
 tmp
 Gemfile.lock
+pkg/
