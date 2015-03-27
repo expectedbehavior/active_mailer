@@ -48,6 +48,7 @@ There's no generator yet (high on the list of things to do). In the mean time, m
 
 3) Open up the FooEmail migration and use "create_active_mailer_table" instead of the usual "create_table".
 
+```ruby
 # sample active mailer migration
 class CreateFooEmail < ActiveRecord::Migration
   def self.up
@@ -62,22 +63,25 @@ class CreateFooEmail < ActiveRecord::Migration
     drop_table :foo_emails
   end
 end
+```
 
 4) Make the template for your email (in this case called 'foo_email.rb') in app/views/active_mailer/base/default_action_mailer
 
 At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send.
 
+```ruby
 > f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com", :recipients => "test@example.com")
 => #<FooEmail id: nil, blahblahblah>
 
 > f.send!
 => true
-
+```
 
 ## Advanced Usage
 
 If your email is always going to have the same subject, sender, bcc, etc, then you can always set those things in the mail object. Remember that it's really just an ActiveRecord object, so you can do anything in this class you can do in ActiveRecord. Here's an example of using ActiveRecord associations to make sure there's a user for the email. It also includes setting the subject and sender by default.
 
+```ruby
 class BeerEmail < ActiveMailer::Base
   belongs_to :user
 
@@ -88,7 +92,7 @@ class BeerEmail < ActiveMailer::Base
     self.sender  = "itstime@beeroclock.com"
   end
 end
-
+```
 
 ## Contributing
 
