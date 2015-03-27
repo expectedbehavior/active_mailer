@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path("../fixtures/dummyapp_rails_3.2/config/environment.rb",  __FILE__)
 require "rails/test_help"
 
+require "wrong"
 require "factory_girl"
 include FactoryGirl::Syntax::Methods
 FactoryGirl.find_definitions

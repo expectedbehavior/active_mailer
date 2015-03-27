@@ -14,8 +14,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = "> 1.3.6"
 
-  s.add_dependency "activesupport" , "~> 3.2"
   s.add_dependency "rails"         , "~> 3.2"
+
+  s.add_development_dependency(%q<rake>, [">= 0"])
+  s.add_development_dependency(%q<wrong>, ["~> 0.7.0"])
+  s.add_development_dependency(%q<factory_girl>, [">= 4.2.0"])
+  s.add_development_dependency(%q<sqlite3>, [">= 1.3.5"])
+  s.add_development_dependency(%q<capybara>, [">= 0.4.0"])
 
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
