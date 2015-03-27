@@ -12,22 +12,22 @@ See the disagreement:
 
 ## Installation
 
-1) Add `gem "active_mailer"` to your `Gemfile` and run `bundle install`
+1. Add `gem "active_mailer"` to your `Gemfile` and run `bundle install`
 
-2) Run `rails generate active_mailer:install`
+2. Run `rails generate active_mailer:install`
 
-3) Run `rake db:migrate`
+3. Run `rake db:migrate`
 
 
 ## Basic Usage
 
 There's only a partial generator. In the mean time, making a new ActiveMailer class can be done like this.
 
-1) Run `rails generate model --no-migration --parent ActiveMailer::Base FooEmail`, you can pass any additional columns just like you would for a normal `generate model`.
+1. Run `rails generate model --no-migration --parent ActiveMailer::Base FooEmail`, you can pass any additional columns just like you would for a normal `generate model`.
 
-2) Run `rails generate active_model:migration FooEmail`
+2. Run `rails generate active_model:migration FooEmail`
 
-3) Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer`
+3. Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer`
 
 At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send!.
 
