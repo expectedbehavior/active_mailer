@@ -1,5 +1,4 @@
 require "active_support/dependencies"
-require "protected_attributes"
 
 module ActiveMailer
   # Our host application root path
