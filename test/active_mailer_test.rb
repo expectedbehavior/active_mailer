@@ -25,7 +25,10 @@ class ActiveMailerTest < ActiveSupport::TestCase
 
   test "sends with correct layout" do
     InvitationEmail.layout "email"
-    email = create(:invitation_email)
+    email = InvitationEmail.new(:sender => "spammy@example.com",
+                                :recipients => ["takesit@upemail.com", nil],
+                                :subject => "YOU GUYS!"
+                                )
     assert { email.send! }
     actual_layout = ActiveMailer::Base::DefaultActionMailer.instance_variable_get("@_layout")
     assert { "email" == actual_layout  }
