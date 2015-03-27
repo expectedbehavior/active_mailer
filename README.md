@@ -12,62 +12,24 @@ See the disagreement:
 
 ## Installation
 
-1) script/plugin install git://github.com/expectedbehavior/active_mailer.git
+1) Add `gem "active_mailer"` to your `Gemfile` and run `bundle install`
 
-2) Make the tables for the classes that ActiveMailer uses to store the people you send email to. There's no need to make the models; those are included with the plugin.
+2) Run `rails generate active_mailer:install`
 
-class CreateActiveMailerTables < ActiveRecord::Migration
-  def self.up
-    create_table :email_users do |t|
-      t.string :email_address
-      t.timestamps
-    end
-
-    create_table :email_user_associations do |t|
-      t.references :email_user
-      t.string :emailable_type
-      t.integer :emailable_id
-      t.timestamps
-    end
-  end
-
-  def self.down
-    drop_table :email_users
-    drop_table :email_user_associations
-  end
-end
+3) Run `rake db:migrate`
 
 
 ## Basic Usage
 
-There's no generator yet (high on the list of things to do). In the mean time, making a new ActiveMailer class can be done like this.
+There's only a partial generator. In the mean time, making a new ActiveMailer class can be done like this.
 
-1) script/generate model FooEmail # or whatever you want to call your email
+1) Run `rails generate model --no-migration --parent ActiveMailer::Base FooEmail`, you can pass any additional columns just like you would for a normal `generate model`.
 
-2) Open up the FooEmail model and change "ActiveRecord::Base" to "ActiveMailer::Base"
+2) Run `rails generate active_model:migration FooEmail`
 
-3) Open up the FooEmail migration and use "create_active_mailer_table" instead of the usual "create_table".
+3) Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer`
 
-```ruby
-# sample active mailer migration
-class CreateFooEmail < ActiveRecord::Migration
-  def self.up
-    create_active_mailer_table :foo_emails do |t|
-      t.integer :registration_id
-      t.string  :kind
-      t.timestamps
-    end
-  end
-
-  def self.down
-    drop_table :foo_emails
-  end
-end
-```
-
-4) Make the template for your email (in this case called 'foo_email.rb') in app/views/active_mailer/base/default_action_mailer
-
-At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send.
+At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send!.
 
 ```ruby
 > f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com", :recipients => "test@example.com")
