@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency(%q<rake>, [">= 0"])
   s.add_development_dependency(%q<wrong>, ["~> 0.7.0"])
-  s.add_development_dependency(%q<factory_girl>, [">= 4.2.0"])
   s.add_development_dependency(%q<sqlite3>, [">= 1.3.5"])
   s.add_development_dependency(%q<capybara>, [">= 0.4.0"])
 

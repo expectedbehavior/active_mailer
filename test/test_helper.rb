@@ -5,9 +5,6 @@ require File.expand_path("../fixtures/dummyapp_rails_3.2/config/environment.rb",
 require "rails/test_help"
 
 require "wrong"
-require "factory_girl"
-include FactoryGirl::Syntax::Methods
-FactoryGirl.find_definitions
 
 # ActionMailer::Base.delivery_method = :test
 # ActionMailer::Base.perform_deliveries = true
