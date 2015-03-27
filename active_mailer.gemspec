@@ -14,8 +14,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = "> 1.3.6"
 
-  s.add_dependency "rails"         , "~> 3.2"
+  s.add_dependency "rails"         , "~> 4.2"
+  s.add_dependency "protected_attributes", "~> 1.0.8"
 
+  s.add_development_dependency(%q<pry>, [">= 0"])
   s.add_development_dependency(%q<rake>, [">= 0"])
   s.add_development_dependency(%q<wrong>, ["~> 0.7.0"])
   s.add_development_dependency(%q<sqlite3>, [">= 1.3.5"])

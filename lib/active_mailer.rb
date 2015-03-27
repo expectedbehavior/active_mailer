@@ -1,4 +1,6 @@
 require "active_support/dependencies"
+require "protected_attributes"
+
 module ActiveMailer
   # Our host application root path
   # We set this when the engine is initialized
@@ -20,7 +22,7 @@ ActiveRecord::ConnectionAdapters::SchemaStatements.module_eval do
       t.string    :subject
       block.call(t)
     end
-    
+
     create_table(*args, &block_with_default_columns)
-  end  
-end 
+  end
+end

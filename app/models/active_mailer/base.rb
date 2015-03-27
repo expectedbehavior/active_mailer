@@ -27,7 +27,7 @@ module ActiveMailer #:nodoc:
     alias :ar_sender= :sender=
     def sender=(email)
       if email.is_a?(String)
-        self.ar_sender = EmailUser.find_or_create_by_email_address(email)
+        self.ar_sender = EmailUser.find_or_create_by(:email_address => email)
       else
         self.ar_sender = email
       end
@@ -39,7 +39,7 @@ module ActiveMailer #:nodoc:
       emails.compact!
       self.ar_recipients = emails.map! do |email|
         if email.is_a?(String)
-          EmailUser.find_or_create_by_email_address(email)
+          EmailUser.find_or_create_by(:email_address => email)
         else
           email
         end
@@ -126,7 +126,7 @@ module ActiveMailer #:nodoc:
       if self.save!
         logger.info "sending email to #{self.recipients.join(", ")}"
         self.class.define_action_mailer_method
-        sent_mail = mailer.deliver
+        sent_mail = mailer.deliver_now
         self.rendered_contents = sent_mail.body.to_s # in case someone wants to save it
         logger.info "email #{self.class.default_email_method_name} sent to #{self.recipients.map(&:email_address).join(", ")} from #{self.sender.email_address}"
         self.update_attribute("sent_at", Time.now)

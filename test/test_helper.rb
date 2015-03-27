@@ -1,10 +1,11 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
-require File.expand_path("../fixtures/dummyapp_rails_3.2/config/environment.rb",  __FILE__)
+require File.expand_path("../fixtures/dummyapp_rails_4.2/config/environment.rb",  __FILE__)
 require "rails/test_help"
 
 require "wrong"
+require "pry"
 
 # ActionMailer::Base.delivery_method = :test
 # ActionMailer::Base.perform_deliveries = true
@@ -13,7 +14,7 @@ require "wrong"
 # Rails.backtrace_cleaner.remove_silencers!
 
 # Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path("../fixtures/dummyapp_rails_3.2/db/migrate/", __FILE__)
+ActiveRecord::Migrator.migrate File.expand_path("../fixtures/dummyapp_rails_4.2/db/migrate/", __FILE__)
 
 # Load support files
 # Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

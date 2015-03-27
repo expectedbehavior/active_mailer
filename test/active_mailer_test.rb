@@ -30,8 +30,7 @@ class ActiveMailerTest < ActiveSupport::TestCase
                                 :subject => "YOU GUYS!"
                                 )
     assert { email.send! }
-    actual_layout = ActiveMailer::Base::DefaultActionMailer.instance_variable_get("@_layout")
-    assert { "email" == actual_layout  }
+    assert { "email" == ActiveMailer::Base::DefaultActionMailer._layout  }
   end
 
   test "sends headers" do
