@@ -1,8 +1,3 @@
-# require 'email_user'
-# require 'email_user_association'
-# require 'action_controller'
-# require 'application_helper'
-# require 'action_controller/url_writer'
 module ActiveMailer #:nodoc:
   class Base < ActiveRecord::Base
     self.abstract_class = true
@@ -167,7 +162,6 @@ module ActiveMailer #:nodoc:
             attachments_to_set = (options[:attachments] || [])
             options.keys.each do |k|
               self.instance_eval("@#{k.to_s} = options[k]") if options[k]
-#              instance_variable_set(k.to_s, options[k])
             end
 
             attachments_to_set.each do |att|
@@ -189,7 +183,7 @@ module ActiveMailer #:nodoc:
       end
 
       def default_email_method_name
-        "#{self.name.underscore}"
+        name.underscore
       end
     end
   end
