@@ -1,18 +1,16 @@
-ActiveMailer
-============
+# ActiveMailer
 
-Introduction goes here.
+Email needs to have somewhere to put the business logic surrounding it, and
+the controller is not the place for that.
 
-DHH thinks this is a bad idea and he's wrong. Email needs to have somewhere to put the business
-logic surrounding it, and the controller is not the place for that.
-http://www.robbyonrails.com/articles/2009/11/16/sending-email-controllers-versus-models
-http://twitter.com/dhh/status/5769040367
-http://twitter.com/dhh/status/5769698185
-http://www.loudthinking.com/posts/43-think-of-emails-as-views-delivered-through-smtp
+See the disagreement:
+* http://www.robbyonrails.com/articles/2009/11/16/sending-email-controllers-versus-models
+* http://twitter.com/dhh/status/5769040367
+* http://twitter.com/dhh/status/5769698185
+* http://www.loudthinking.com/posts/43-think-of-emails-as-views-delivered-through-smtp
 
 
-Installation
-============
+## Installation
 
 1) script/plugin install git://github.com/expectedbehavior/active_mailer.git
 
@@ -24,7 +22,7 @@ class CreateActiveMailerTables < ActiveRecord::Migration
       t.string :email_address
       t.timestamps
     end
-    
+
     create_table :email_user_associations do |t|
       t.references :email_user
       t.string :emailable_type
@@ -40,8 +38,7 @@ class CreateActiveMailerTables < ActiveRecord::Migration
 end
 
 
-Basic Usage
-===========
+## Basic Usage
 
 There's no generator yet (high on the list of things to do). In the mean time, making a new ActiveMailer class can be done like this.
 
@@ -77,8 +74,7 @@ At this point, there's no need to do any more. You can send your email by making
 => true
 
 
-More Advanced Usage
-===================
+## Advanced Usage
 
 If your email is always going to have the same subject, sender, bcc, etc, then you can always set those things in the mail object. Remember that it's really just an ActiveRecord object, so you can do anything in this class you can do in ActiveRecord. Here's an example of using ActiveRecord associations to make sure there's a user for the email. It also includes setting the subject and sender by default.
 
@@ -86,7 +82,7 @@ class BeerEmail < ActiveMailer::Base
   belongs_to :user
 
   validates_presence_of :user
-  
+
   def after_initialize
     self.subject = "It's Beer O'Clock"
     self.sender  = "itstime@beeroclock.com"
@@ -94,18 +90,14 @@ class BeerEmail < ActiveMailer::Base
 end
 
 
+## Contributing
 
-Contributing
-============
+[Bugs/Feature](http://www.pivotaltracker.com/projects/14211)
 
-Bugs/Feature
-http://www.pivotaltracker.com/projects/14211
 
-Authors
-=======
+## Authors
+
 Matt Gordon
 
 
-Copyright (c) 2009 [Expected Behavior, LLC], released under the MIT license
-
-
+Copyright (c) 2009-2015 [Expected Behavior, LLC], released under the MIT license
