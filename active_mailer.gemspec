@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<rake>, [">= 0"])
   s.add_development_dependency(%q<wrong>, ["~> 0.7.0"])
   s.add_development_dependency(%q<sqlite3>, [">= 1.3.5"])
-  s.add_development_dependency(%q<capybara>, [">= 0.4.0"])
 
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
