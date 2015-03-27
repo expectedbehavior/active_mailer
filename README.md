@@ -29,10 +29,11 @@ There's only a partial generator. In the mean time, making a new ActiveMailer cl
 
 3. Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer`
 
-At this point, there's no need to do any more. You can send your email by making an object, setting the appropriate details, and calling send!.
+You're ready! You can send your email by making an instance of `FooEmail`, setting the appropriate details, and calling `send!`.
 
 ```ruby
-> f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com", :recipients => "test@example.com")
+> f = FooEmail.new(:subject => "My Awesome Email", :sender => "noreply@example.com",
+>                  :recipients => "test@example.com")
 => #<FooEmail id: nil, blahblahblah>
 
 > f.send!
@@ -41,7 +42,14 @@ At this point, there's no need to do any more. You can send your email by making
 
 ## Advanced Usage
 
-If your email is always going to have the same subject, sender, bcc, etc, then you can always set those things in the mail object. Remember that it's really just an ActiveRecord object, so you can do anything in this class you can do in ActiveRecord. Here's an example of using ActiveRecord associations to make sure there's a user for the email. It also includes setting the subject and sender by default.
+If your email is always going to have the same subject, sender, bcc, etc, then
+you can set those in the ActiveMailer object. Remember that it's really just
+an ActiveRecord object, so you can do anything in this class you can do in
+ActiveRecord.
+
+Here's an example of using ActiveRecord associations to make sure there's a
+user for the email. It also includes setting the subject and sender by
+default.
 
 ```ruby
 class BeerEmail < ActiveMailer::Base
