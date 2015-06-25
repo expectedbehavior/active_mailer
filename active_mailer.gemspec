@@ -1,3 +1,6 @@
+$:.push File.expand_path("../lib", __FILE__)
+require "active_mailer/version"
+
 # Provide a simple gemspec so you can easily use your enginex
 # project in your rails apps through git.
 Gem::Specification.new do |s|
@@ -7,7 +10,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Matt Gordon"]
   s.email       = 'support@expectedbehavior.com'
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
-  s.version = "0.0.9"
+  s.version = ActiveMailer::VERSION
   s.homepage    =
     'https://github.com/expectedbehavior/active_mailer'
 
