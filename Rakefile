@@ -11,7 +11,13 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-task :default => :test
+if !ENV["APPRAISAL_INITIALIZED"]
+  task :default do
+    system("appraisal rake")
+  end
+else
+  task :default => :test
+end
 
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
