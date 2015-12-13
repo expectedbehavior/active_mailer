@@ -66,6 +66,12 @@ end
 
 ## Contributing
 
+Setup the project with `script/setup`.
+
+We use the [Appraisal gem](https://github.com/thoughtbot/appraisal) to test against multiple versions of Rails. By default rake will test every supported version of Rails, but you can isolate a specific vesion by using `appraisal rails4.1 rake`.
+
+The tests use a [micro Rails app](test/fixtures/dummy) that you should know about.
+
 [Bugs/Feature](http://www.pivotaltracker.com/projects/14211)
 
 
