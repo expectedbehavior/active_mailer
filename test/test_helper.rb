@@ -18,6 +18,8 @@ require "pry"
 
 # Rails.backtrace_cleaner.remove_silencers!
 
+puts "Running tests against Rails #{Rails::VERSION::STRING}"
+
 # Run any available migration
 Dummy::Application.initialize!
 
