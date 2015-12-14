@@ -72,6 +72,6 @@ end
 ## Authors
 
 Matt Gordon
+Elijah Miller
 
-
-Copyright (c) 2009-2015 [Expected Behavior, LLC], released under the MIT license
+Copyright (c) 2009-2015 [Expected Behavior, LLC](http://expectedbehavior.com), released under the MIT license
