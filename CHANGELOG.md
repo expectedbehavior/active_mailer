@@ -1,3 +1,6 @@
+### 1.0.0
+* Support for Rails 3.2 to 4.2 with micro rails dummy app
+
 ### 0.0.10
 * Update project to modern Ruby standards.
 
