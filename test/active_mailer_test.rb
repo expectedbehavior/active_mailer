@@ -30,8 +30,12 @@ class ActiveMailerTest < ActiveSupport::TestCase
                                 :subject => "YOU GUYS!"
                                 )
     assert { email.send! }
-    actual_layout = ActiveMailer::Base::DefaultActionMailer.instance_variable_get("@_layout")
-    assert { "email" == actual_layout  }
+    layout = if Rails::VERSION::MAJOR == 3
+      ActiveMailer::Base::DefaultActionMailer.instance_variable_get("@_layout")
+    else
+      ActiveMailer::Base::DefaultActionMailer._layout
+    end
+    assert { "email" == layout  }
   end
 
   test "sends headers" do
