@@ -1,3 +1,6 @@
+### 0.0.10
+* Update project to modern Ruby standards.
+
 ### 0.0.9
 * okay, this time we are totally setting the headers correctly
 
