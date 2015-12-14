@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name = "active_mailer"
   s.summary     = "Adds model-level validation to emails."
   s.description = "Applications that have complex email sending logic have DRYness problems. ActiveMailer solves that by making a legitimate email model where all sending logic belongs. It is also capable of acting as an audit trail for email sending."
-  s.authors     = ["Matt Gordon"]
+  s.authors     = ["Matt Gordon", "Elijah Miller"]
   s.email       = 'support@expectedbehavior.com'
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.rdoc"]
   s.version = ActiveMailer::VERSION
