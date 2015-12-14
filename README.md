@@ -23,11 +23,11 @@ See the disagreement:
 
 There's only a partial generator. In the mean time, making a new ActiveMailer class can be done like this.
 
-1. Run `rails generate model --no-migration --parent ActiveMailer::Base FooEmail`, you can pass any additional columns just like you would for a normal `generate model`.
+1. Run `rails generate model FooEmail --no-migration --parent ActiveMailer::Base`, you can pass any additional columns just like you would for a normal `generate model`.
 
-2. Run `rails generate active_model:migration FooEmail`
+2. Run `rails generate active_mailer:migration FooEmail`
 
-3. Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer`
+3. Make the template for your email (in this case called `foo_email.rb`) in `app/views/active_mailer/base/default_action_mailer/foo_email.html.erb`
 
 You're ready! You can send your email by making an instance of `FooEmail`, setting the appropriate details, and calling `send!`.
 
