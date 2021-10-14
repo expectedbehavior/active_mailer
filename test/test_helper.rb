@@ -7,14 +7,24 @@ $: << File.join(File.dirname(__FILE__), "lib")
 require "active_mailer"
 
 
-# This is a very dumb way of getting the current Rails version
-# appraisal is running out of the name of the bundle gemfile. If you
-# start using a different naming scheme for the gemfiles, this will
-# fall apart.
-appraisal_version = ENV['BUNDLE_GEMFILE'].split("/").last.split("rails").last.split(".gemfile")
+# Appraisal names the generated Gemfile according to the name you
+# provide in the Appraisals file. We use the name of the appraisal to
+# load the correct Rails application for testing the current
+# Appraisal. For example, if the Appraisals file contains
+#
+#   appraise 'rails_5.1.7' do
+#     gem 'rails', '~> 5.1.7'
+#     gem 'sqlite3', '~> 1.4.2'
+#   end
+#
+# then we expect Appraisal to generate gemfiles/rails_5.1.7.gemfile.
+appraisal_name = ENV['BUNDLE_GEMFILE'].split("/").last.chomp(".gemfile")
 
-# require File.expand_path("../fixtures/rails-#{appraisal_version}/application.rb",  __FILE__)
-require File.expand_path("../fixtures/dummy/application.rb",  __FILE__)
+# Load the Rails test project that matches the appraisal name. If the
+# appraisal is named 'rails_5.1.7' there should be a
+# fixtures/rails_5.1.7 directory containing a valid Rails project for
+# testing.
+require File.expand_path("../fixtures/#{appraisal_name}/application.rb",  __FILE__)
 require "rails/test_help"
 
 require "wrong"
