@@ -20,6 +20,7 @@ module Dummy
     config.consider_all_requests_local = true
     config.eager_load = false
     config.encoding = "utf-8"
+    config.root = APP_ROOT
     config.paths["app/controllers"] << "#{APP_ROOT}/app/controllers"
     config.paths["app/models"] << "#{APP_ROOT}/app/models"
     config.paths["app/views"] << "#{APP_ROOT}/app/views"
