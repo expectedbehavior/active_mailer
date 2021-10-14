@@ -1,4 +1,4 @@
-# This is a minimal Rails application with Rails 3 and 4 compatibility.
+# This is a minimal Rails application
 #
 # copied with modifications from https://github.com/thoughtbot/clearance/blob/master/spec/dummy/application.rb
 require "rails/all"
