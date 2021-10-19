@@ -10,6 +10,5 @@ log/*.log
 vendor/bundle
 test/log
 tmp
-Gemfile.lock
 pkg/
 /gemfiles/*.lock

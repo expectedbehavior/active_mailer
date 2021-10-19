@@ -1,17 +1,10 @@
-appraise 'rails3.2' do
-  gem 'rails', '~> 3.2.21'
-  gem 'test-unit', '~> 3.0'
+appraise 'rails_5.1.7' do
+  gem 'rails', '~> 5.1.7'
+  gem 'sqlite3', '~> 1.4.2'
 end
 
-appraise 'rails4.0' do
-  gem 'rails', '~> 4.0.13'
-  gem 'test-unit'
-end
-
-appraise 'rails4.1' do
-  gem 'rails', '~> 4.1.9'
-end
-
-appraise 'rails4.2' do
-  gem 'rails', '~> 4.2.0'
-end
+# Consider adding these to a specific appraisal if you need to debug
+# gem "byebug"
+# gem "pry"
+# gem "pry-rails"
+# gem "pry-byebug"

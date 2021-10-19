@@ -1,4 +1,4 @@
-# This is a minimal Rails application with Rails 3 and 4 compatibility.
+# This is a minimal Rails application
 #
 # copied with modifications from https://github.com/thoughtbot/clearance/blob/master/spec/dummy/application.rb
 require "rails/all"
@@ -16,23 +16,35 @@ module Dummy
     config.action_mailer.delivery_method = :test
     config.active_support.deprecation = :stderr
     config.active_support.test_order = :random
-    config.assets.enabled = true
     config.cache_classes = true
     config.consider_all_requests_local = true
     config.eager_load = false
     config.encoding = "utf-8"
+    config.root = APP_ROOT
     config.paths["app/controllers"] << "#{APP_ROOT}/app/controllers"
     config.paths["app/models"] << "#{APP_ROOT}/app/models"
     config.paths["app/views"] << "#{APP_ROOT}/app/views"
+    config.paths["app/assets"] << "#{APP_ROOT}/app/assets"
     config.paths["config/database"] = "#{APP_ROOT}/config/database.yml"
     config.paths["db"] = "#{APP_ROOT}/db"
     config.paths["db/migrate"] = "#{APP_ROOT}/db/migrate"
     config.paths["log"] = "tmp/log/development.log"
-    config.secret_token = "SECRET_TOKEN_IS_MIN_30_CHARS_LONG"
+    config.paths.add "config/routes.rb", with: "#{APP_ROOT}/config/routes.rb"
+    config.secret_key_base = "SECRET_KEY_BASE"
 
-    if Rails::VERSION::MAJOR >= 4
-      config.secret_key_base = "SECRET_KEY_BASE"
+    config.load_defaults 5.1
+
+    if config.active_record.sqlite3.respond_to?(:represent_boolean_as_integer)
+      if Rails::VERSION::MAJOR < 6
+        config.active_record.sqlite3.represent_boolean_as_integer = true
+      end
     end
+
+    if Rails::VERSION::MAJOR >= 6
+      config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
+    end
+
+    config.active_job.queue_adapter = :inline
 
     def require_environment!
       initialize!

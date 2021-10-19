@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = "> 1.3.6"
 
-  s.add_dependency "rails", ">= 3.2"
+  s.add_dependency "rails", ">= 5.1"
 
   s.add_development_dependency(%q<pry>, [">= 0"])
   s.add_development_dependency(%q<rake>, [">= 0"])
