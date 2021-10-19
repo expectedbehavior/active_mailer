@@ -1,3 +1,9 @@
+### 1.1.0
+* Remove support for Rails prior to 5.1
+* Add support for Rails 5.1
+
+This is an intermediate release on the way to bringing this gem up to date.
+
 ### 1.0.0
 * Support for Rails 3.2 to 4.2 with micro rails dummy app
 
